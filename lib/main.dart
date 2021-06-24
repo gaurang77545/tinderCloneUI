@@ -9,6 +9,7 @@ import './profiles.dart';
 import 'Screens/Message/message.dart';
 import 'Screens/Profile/profile.dart';
 import 'Screens/Splash_screen/splash.dart';
+
 //Files Imported
 void main() => runApp(MyApp());
 
@@ -28,17 +29,15 @@ class MyApp extends StatelessWidget {
         primaryColorBrightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-
       home: SplashScreen(),
       routes: {
         WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
         LoginScreen.routeName: (ctx) => LoginScreen(),
         SignUpScreen.routeName: (ctx) => SignUpScreen(),
-        MyHomePage.routename: (ctx) => MyHomePage(),
+        MyHomePage.routeName: (ctx) => MyHomePage(),
         ProfileScreen.routeName: (ctx) => ProfileScreen(),
         Chatpage.routeName: (ctx) => Chatpage(name: 'CHATS')
       },
-
     );
   }
 }
@@ -47,7 +46,7 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
-  static const routename = './HomePage';
+  static const routeName = './HomePage';
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -79,7 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
       ),
-
       actions: <Widget>[
         new IconButton(
           icon: new Icon(

@@ -7,6 +7,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -27,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         title: new Text(
           "PROFILE",
-          style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
       ),
@@ -35,46 +36,39 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: size.height / 3.5,
-              decoration: BoxDecoration(
-                  color: Colors.red,
-                  image: DecorationImage(
-                      image: NetworkImage("img1.jpg"), fit: BoxFit.cover)),
+              width: double.infinity,
+              height: size.height / 5,
               child: Container(
-                width: double.infinity,
-                height: size.height / 4,
-                child: Container(
-                  alignment: Alignment(0.0, 2.5),
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage("img1.jpg"),
-                    radius: 60.0,
-                  ),
+                alignment: Alignment(0.0, 2.5),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage("img1.jpg"),
+                  radius: 60.0,
                 ),
               ),
             ),
             SizedBox(
-              height: 80,
+              height: 40,
             ),
             Text(
-              "Username",
+              "Karthik, 20",
               style: TextStyle(
                   fontSize: 25.0,
-                  color: Colors.blueGrey,
+                  color: Colors.black,
                   letterSpacing: 2.0,
-                  fontWeight: FontWeight.w400),
+                  fontWeight: FontWeight.w700),
             ),
             SizedBox(
               height: 10,
             ),
-            Text(
+            /* Text(
               "Maharashtra, India",
               style: TextStyle(
                   fontSize: 18.0,
                   color: Colors.black45,
                   letterSpacing: 2.0,
                   fontWeight: FontWeight.w300),
-            ),
-            SizedBox(
+            ),*/
+            /* SizedBox(
               height: 10,
             ),
             Text(
@@ -84,61 +78,43 @@ class ProfileScreen extends StatelessWidget {
                   color: Colors.black45,
                   letterSpacing: 2.0,
                   fontWeight: FontWeight.w300),
-            ),
-            SizedBox(
+            ),*/
+            /*SizedBox(
               height: 10,
-            ),
-            Card(
-              margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Name : ",
-                          style: TextStyle(
-                              color: Colors.blueAccent,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(
-                          height: 7,
-                        ),
-                        Text(
-                          "Rohit",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.w300),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Age : ",
-                          style: TextStyle(
-                              color: Colors.blueAccent,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Text(
-                          "25",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 22.0,
-                              fontWeight: FontWeight.w300),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+            ),*/
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RoundIconButton.small(
+                    onPressed: () {},
+/*
+                    bgColor: Colors.white,
+*/
+                    icon: Icons.settings,
+                    iconColor: Colors.blueGrey,
+/*
+                    info: 'SETTINGS',
+*/
+                  ),
+                  RoundIconButton.large(
+                    icon: Icons.camera_alt_outlined,
+                    iconColor: Colors.white,
+                    /*   bgColor: Colors.redAccent,
+                    info: 'ADD MEDIA',*/
+                  ),
+                  RoundIconButton.small(
+/*
+                    bgColor: Colors.white,
+*/
+                    icon: Icons.edit,
+                    iconColor: Colors.blueGrey,
+/*
+                    info: 'EDIT INFO',
+*/
+                  ),
+                ],
               ),
             ),
           ],

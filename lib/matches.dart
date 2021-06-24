@@ -35,6 +35,7 @@ class Match extends ChangeNotifier {
 
   void like() {
     if (decision == Decision.indecided) {
+      print('LIKE');
       decision = Decision.like;
       notifyListeners();
     }
@@ -42,6 +43,7 @@ class Match extends ChangeNotifier {
 
   void nope() {
     if (decision == Decision.indecided) {
+      print('NOPE');
       decision = Decision.nope;
       notifyListeners();
     }
@@ -49,6 +51,7 @@ class Match extends ChangeNotifier {
 
   void superLike() {
     if (decision == Decision.indecided) {
+      print('SUPER');
       decision = Decision.superLike;
       notifyListeners();
     }

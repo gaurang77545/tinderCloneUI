@@ -75,11 +75,9 @@ class _BodyState extends State<Body> {
                   text: "LOGIN",
                   press: () {
                     if (_formKey.currentState.validate()) {
-                      Navigator.push(
+                      Navigator.popAndPushNamed(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MyHomePage(title: 'Flutter Demo Home Page')),
+                        MyHomePage.routeName,
                       );
                     }
                   }),
@@ -96,7 +94,9 @@ class _BodyState extends State<Body> {
                   );
                 },
               ),
-              SizedBox(height: 10,)
+              SizedBox(
+                height: 10,
+              )
             ],
           ),
         ),
