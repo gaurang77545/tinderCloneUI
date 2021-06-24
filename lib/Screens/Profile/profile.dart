@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tinder/main.dart';
 
+import '../../constants.dart';
+
 class ProfileScreen extends StatelessWidget {
   static const routeName = './ProfileScreen';
   @override
@@ -60,59 +62,45 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            /* Text(
-              "Maharashtra, India",
-              style: TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.black45,
-                  letterSpacing: 2.0,
-                  fontWeight: FontWeight.w300),
-            ),*/
-            /* SizedBox(
-              height: 10,
-            ),
-            Text(
-              "BIO",
-              style: TextStyle(
-                  fontSize: 15.0,
-                  color: Colors.black45,
-                  letterSpacing: 2.0,
-                  fontWeight: FontWeight.w300),
-            ),*/
-            /*SizedBox(
-              height: 10,
-            ),*/
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  RoundIconButton.small(
-                    onPressed: () {},
-/*
-                    bgColor: Colors.white,
-*/
-                    icon: Icons.settings,
-                    iconColor: Colors.blueGrey,
-/*
-                    info: 'SETTINGS',
-*/
+                  Column(
+                    children: [
+                      RoundIconButton.small(
+                        onPressed: () {},
+                        icon: Icons.settings,
+                        iconColor: Colors.blueGrey,
+                      ),
+                      IconTextInfo(
+                        text: 'SETTINGS',
+                      ),
+                    ],
                   ),
-                  RoundIconButton.large(
-                    icon: Icons.camera_alt_outlined,
-                    iconColor: Colors.white,
-                    /*   bgColor: Colors.redAccent,
-                    info: 'ADD MEDIA',*/
+                  Column(
+                    children: [
+                      RoundIconButton.large(
+                        icon: Icons.camera_alt_outlined,
+                        iconColor: Colors.white,
+                        bgColor: Colors.redAccent,
+                      ),
+                      IconTextInfo(
+                        text: 'ADD MEDIA',
+                      ),
+                    ],
                   ),
-                  RoundIconButton.small(
-/*
-                    bgColor: Colors.white,
-*/
-                    icon: Icons.edit,
-                    iconColor: Colors.blueGrey,
-/*
-                    info: 'EDIT INFO',
-*/
+                  Column(
+                    children: [
+                      RoundIconButton.small(
+                        icon: Icons.edit,
+                        iconColor: Colors.blueGrey,
+                      ),
+                      IconTextInfo(
+                        text: 'EDIT INFO',
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -120,6 +108,20 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class IconTextInfo extends StatelessWidget {
+  final String text;
+
+  const IconTextInfo({Key key, this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: kIconInfoTextStyle,
     );
   }
 }

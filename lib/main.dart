@@ -166,24 +166,28 @@ class RoundIconButton extends StatelessWidget {
   final Color iconColor;
   final double size;
   final VoidCallback onPressed;
+  final Color bgColor;
 
   RoundIconButton.large({
     this.icon,
     this.iconColor,
     this.onPressed,
-  }) : size = 60.0;
+    this.bgColor = Colors.white,
+  }) : size = 70.0;
 
   RoundIconButton.small({
     this.icon,
     this.iconColor,
     this.onPressed,
-  }) : size = 50.0;
+    this.bgColor = Colors.white,
+  }) : size = 60.0;
 
   RoundIconButton({
     this.icon,
     this.iconColor,
     this.size,
     this.onPressed,
+    this.bgColor = Colors.white,
   });
 
   @override
@@ -191,12 +195,10 @@ class RoundIconButton extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: new BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: [
-            new BoxShadow(color: const Color(0x11000000), blurRadius: 10.0),
-          ]),
+      decoration:
+          new BoxDecoration(shape: BoxShape.circle, color: bgColor, boxShadow: [
+        new BoxShadow(color: const Color(0x11000000), blurRadius: 10.0),
+      ]),
       child: new RawMaterialButton(
         shape: new CircleBorder(),
         elevation: 0.0,
