@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tinder/Screens/Login/login_screen.dart';
+import 'package:tinder/Screens/Message/IndvChat/chat.dart';
+import 'package:tinder/Screens/Signup/signup_screen.dart';
 import 'package:tinder/Screens/Welcome/welcome_screen.dart';
 import './cards.dart';
 import './matches.dart';
@@ -25,7 +28,17 @@ class MyApp extends StatelessWidget {
         primaryColorBrightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
+
       home: SplashScreen(),
+      routes: {
+        WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
+        LoginScreen.routeName: (ctx) => LoginScreen(),
+        SignUpScreen.routeName: (ctx) => SignUpScreen(),
+        MyHomePage.routename: (ctx) => MyHomePage(),
+        ProfileScreen.routeName: (ctx) => ProfileScreen(),
+        Chatpage.routeName: (ctx) => Chatpage(name: 'CHATS')
+      },
+
     );
   }
 }
@@ -34,6 +47,7 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
+  static const routename = './HomePage';
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
