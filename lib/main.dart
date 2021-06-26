@@ -9,6 +9,7 @@ import './profiles.dart';
 import 'Screens/Message/message.dart';
 import 'Screens/Profile/profile.dart';
 import 'Screens/Splash_screen/splash.dart';
+import 'Screens/Profile/editProfile/edit.dart';
 
 //Files Imported
 void main() => runApp(MyApp());
@@ -36,7 +37,9 @@ class MyApp extends StatelessWidget {
         SignUpScreen.routeName: (ctx) => SignUpScreen(),
         MyHomePage.routeName: (ctx) => MyHomePage(),
         ProfileScreen.routeName: (ctx) => ProfileScreen(),
-        Chatpage.routeName: (ctx) => Chatpage(name: 'CHATS')
+        Chatpage.routeName: (ctx) => Chatpage(name: 'CHATS'),
+        EditProfilePage.routeName: (ctx) => EditProfilePage()
+
       },
     );
   }

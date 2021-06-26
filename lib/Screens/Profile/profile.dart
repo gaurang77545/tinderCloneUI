@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tinder/main.dart';
+import 'editProfile/edit.dart';
 
 import '../../constants.dart';
 
 class ProfileScreen extends StatelessWidget {
+
+
+
   static const routeName = './ProfileScreen';
   @override
   Widget build(BuildContext context) {
@@ -96,6 +100,12 @@ class ProfileScreen extends StatelessWidget {
                       RoundIconButton.small(
                         icon: Icons.edit,
                         iconColor: Colors.blueGrey,
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            EditProfilePage.routeName,
+                          );
+                        },
                       ),
                       IconTextInfo(
                         text: 'EDIT INFO',
