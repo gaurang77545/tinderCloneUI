@@ -24,6 +24,7 @@ class _BodyState extends State<Body> {
   String lName;
   String gender;
   String location;
+  String bio;
   String pass;
   int number;
   int age;
@@ -98,9 +99,7 @@ class _BodyState extends State<Body> {
                   //controller: _emailField;
                   hintText: "Mobile Number",
                   onChanged: (value) {
-/*
-                    number = '$value';
-*/
+                    number = int.tryParse(value);
                   },
                   validator: (value) {
                     if (value.isEmpty) {
@@ -119,7 +118,6 @@ class _BodyState extends State<Body> {
                   hintText: "Age",
                   onChanged: (value) {
                     age = int.tryParse(value);
-
                   },
                   validator: (value) {
                     if (value.isEmpty) {
@@ -157,12 +155,11 @@ class _BodyState extends State<Body> {
                   },
                 ),
                 RoundedInputField(
-                  maxIn: 4,
                   icon: Icons.info_outline,
                   //controller: _emailField;
                   hintText: "Tell us about yourself",
                   onChanged: (value) {
-                    location = '$value';
+                    bio = '$value';
                   },
                   validator: (value) {
                     if (value.isEmpty) {

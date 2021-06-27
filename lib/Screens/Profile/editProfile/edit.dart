@@ -9,10 +9,12 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _ageController = TextEditingController();
+  TextEditingController _locationController = TextEditingController();
+  TextEditingController _bioController = TextEditingController();
+  String gender;
 
-  TextEditingController _controller1 = TextEditingController();
-  TextEditingController _controller2 = TextEditingController();
-  TextEditingController _controller3 = TextEditingController();
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {
@@ -65,7 +67,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: AssetImage("1.jpg",
+                              image: AssetImage(
+                                "1.jpg",
                               ))),
                     ),
                     Positioned(
@@ -93,13 +96,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Full Name", false,_controller1
-
-              ),
-              buildTextField("Age", false,_controller2
-              ),
-              buildTextField("Location", false,_controller3
-
+              buildTextField("Full Name", 'Karthik', false, _nameController, 1),
+              buildTextField("Age", '20', false, _ageController, 1),
+              buildTextField(
+                  "Location", 'Hyderabad', false, _locationController, 1),
+              buildTextField(
+                  "Bio", 'I am very expressive', false, _bioController, 3),
+              AppDropdownInput(
+                hintText: "Gender",
+                options: ["Male", "Female"],
+                value: gender,
+                onChanged: (String value) {
+                  setState(() {
+                    gender = value;
+                  });
+                },
+                getLabel: (String value) => value,
               ),
               SizedBox(
                 height: 35,
@@ -112,9 +124,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
                     onPressed: () {
-                      _controller1.clear();
-                      _controller2.clear();
-                      _controller3.clear();
+                      _nameController.clear();
+                      _ageController.clear();
+                      _locationController.clear();
+                      _bioController.clear();
                     },
                     child: Text("CANCEL",
                         style: TextStyle(
@@ -125,8 +138,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   RaisedButton(
                     onPressed: () {
                       Navigator.pop(context);
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text('Successfully Edited',textAlign: TextAlign.center,)));
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                        'Successfully Edited',
+                        textAlign: TextAlign.center,
+                      )));
                     },
                     color: Colors.green,
                     padding: EdgeInsets.symmetric(horizontal: 50),
@@ -150,24 +166,81 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  Widget buildTextField(
-      String labelText, bool isPasswordTextField, TextEditingController cont) {
+  Widget buildTextField(String labelText, String hintText,
+      bool isPasswordTextField, TextEditingController cont, int maxLn) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 35.0),
+      padding: const EdgeInsets.only(bottom: 25.0),
       child: TextField(
+        maxLines: maxLn,
         controller: cont,
         obscureText: isPasswordTextField ? showPassword : false,
         decoration: InputDecoration(
-
             contentPadding: EdgeInsets.only(bottom: 3),
             //labelText: labelText,
-            helperText: labelText,
+            helperText: labelText, //Display users info before tap.
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: labelText,
+            hintText: hintText,
             hintStyle: TextStyle(
               fontSize: 16,
               color: Colors.black,
             )),
+      ),
+    );
+  }
+}
+
+class AppDropdownInput<T> extends StatelessWidget {
+  final String hintText;
+  final List<T> options;
+  final T value;
+  final String Function(T) getLabel;
+  final void Function(T) onChanged;
+
+  AppDropdownInput({
+    this.hintText = 'Please select an Option',
+    this.options = const [],
+    this.getLabel,
+    this.value,
+    this.onChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 25),
+      child: FormField<T>(
+        builder: (FormFieldState<T> state) {
+          return InputDecorator(
+            decoration: InputDecoration(
+              hintStyle: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+              ),
+              contentPadding: EdgeInsets.only(bottom: 3),
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              helperText: hintText,
+/*
+              labelText: hintText,
+*/
+              /*border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(5.0)),*/
+            ),
+            isEmpty: value == null || value == '',
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<T>(
+                value: value,
+                isDense: true,
+                onChanged: onChanged,
+                items: options.map((T value) {
+                  return DropdownMenuItem<T>(
+                    value: value,
+                    child: Text(getLabel(value)),
+                  );
+                }).toList(),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
