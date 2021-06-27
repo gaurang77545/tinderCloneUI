@@ -212,6 +212,7 @@ class AppDropdownInput<T> extends StatelessWidget {
         builder: (FormFieldState<T> state) {
           return InputDecorator(
             decoration: InputDecoration(
+              hintText: "Male",
               hintStyle: TextStyle(
                 fontSize: 16,
                 color: Colors.black,
