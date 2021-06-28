@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tinder/main.dart';
 
 import '../../constants.dart';
+import '../myhomepage.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routeName = './ProfileScreen';

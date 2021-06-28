@@ -1,5 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tinder/constants.dart';
+import 'package:tinder/network_utils/api.dart';
+import '../../../EndToEndEncrypt.dart';
+import '../../myhomepage.dart';
 import '/Screens/Login/login_screen.dart';
 import '/Screens/Signup/components/background.dart';
 import '/Screens/Signup/components/or_divider.dart';
@@ -25,7 +31,9 @@ class _BodyState extends State<Body> {
   String gender;
   String location;
   String pass;
+  String bio;
   int number;
+  bool _isLoading=false;
   int age;
   final _formKey = GlobalKey<FormState>();
   List<bool> isSelected = [false, false, false];
@@ -98,9 +106,9 @@ class _BodyState extends State<Body> {
                   //controller: _emailField;
                   hintText: "Mobile Number",
                   onChanged: (value) {
-/*
-                    number = '$value';
-*/
+
+                    number = int.tryParse(value);
+
                   },
                   validator: (value) {
                     if (value.isEmpty) {
@@ -162,7 +170,7 @@ class _BodyState extends State<Body> {
                   //controller: _emailField;
                   hintText: "Tell us about yourself",
                   onChanged: (value) {
-                    location = '$value';
+                    bio = '$value';
                   },
                   validator: (value) {
                     if (value.isEmpty) {
@@ -208,12 +216,7 @@ class _BodyState extends State<Body> {
                   text: "SIGNUP",
                   press: () {
                     if (_formKey.currentState.validate()) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MyHomePage(title: 'Flutter Demo Home Page')),
-                      );
+                      _register();
                     } else {
                       return;
                     }
@@ -261,6 +264,51 @@ class _BodyState extends State<Body> {
         ),
       ),
     );
+  }
+
+  void _register() async {
+    print("yes");
+    setState(() {
+      //_isLoading = true;
+    });
+    print(EndToEndEncryption().Encrypt(fName).toString());
+
+
+
+    var data = {
+      'email': email,
+      'password': pass,
+      'phone': number,
+      'fname': EndToEndEncryption().Encrypt(fName),
+      'lname': EndToEndEncryption().Encrypt(lName),
+      'user_name': EndToEndEncryption().Encrypt(username),
+      'location': EndToEndEncryption().Encrypt(location),
+      'gender': EndToEndEncryption().Encrypt(gender),
+      'age': age,
+      'bio':bio
+    };
+
+    var res = await Network().authData(data, '/v1/register');
+
+    var body = json.decode(res.body);
+    print(body);
+    if (body['success']) {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.setString('token', json.encode(body['token']));
+      localStorage.setString('user', json.encode(body['user']));
+      setState(() {
+        _isLoading = false;
+      });
+      Navigator.push(
+        context,
+        new MaterialPageRoute(builder: (context) => MyHomePage()),
+      );
+    }
+
+    setState(() {
+      _isLoading = false;
+
+    });
   }
 }
 
