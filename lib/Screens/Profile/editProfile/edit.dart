@@ -16,6 +16,25 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String gender;
 
   bool showPassword = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: "Karthik");
+    _ageController = TextEditingController(text: "20");
+    _locationController = TextEditingController(text: "Hyderabad");
+    _bioController = TextEditingController(text: "I am very expressive");
+  }
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _ageController.dispose();
+    _locationController.dispose();
+    _bioController.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,12 +115,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
               SizedBox(
                 height: 35,
               ),
-              buildTextField("Full Name", 'Karthik', false, _nameController, 1),
-              buildTextField("Age", '20', false, _ageController, 1),
+              buildTextField("Full Name", false, _nameController, 1),
+              buildTextField("Age", false, _ageController, 1),
               buildTextField(
-                  "Location", 'Hyderabad', false, _locationController, 1),
+                  "Location", false, _locationController, 1),
               buildTextField(
-                  "Bio", 'I am very expressive', false, _bioController, 3),
+                  "Bio", false, _bioController, 2),
               AppDropdownInput(
                 hintText: "Gender",
                 options: ["Male", "Female"],
@@ -166,8 +185,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  Widget buildTextField(String labelText, String hintText,
+  Widget buildTextField(String labelText,
       bool isPasswordTextField, TextEditingController cont, int maxLn) {
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 25.0),
       child: TextField(
@@ -179,13 +199,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
             //labelText: labelText,
             helperText: labelText, //Display users info before tap.
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            hintText: hintText,
+            //hintText: hintText,
             hintStyle: TextStyle(
               fontSize: 16,
               color: Colors.black,
             )),
-      ),
+        autofocus: true,
+      )
+
     );
+
   }
 }
 
@@ -246,3 +269,41 @@ class AppDropdownInput<T> extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
