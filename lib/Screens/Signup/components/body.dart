@@ -214,12 +214,7 @@ class _BodyState extends State<Body> {
                           gender, location, bio, pass, number, age);
                       print(myController.getData());
                       myControllerLogin.setEmailAndPassword(email, pass);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MyHomePage(title: 'Flutter Demo Home Page')),
-                      );
+                      Get.to(MyHomePage(title: 'Flutter Demo Home Page'));
                     } else {
                       return;
                     }
@@ -230,14 +225,8 @@ class _BodyState extends State<Body> {
                   login: false,
                   press: () {
                     _formKey.currentState.save();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return LoginScreen();
-                        },
-                      ),
-                    );
+
+                    Get.to(LoginScreen());
                   },
                 ),
                 OrDivider(),

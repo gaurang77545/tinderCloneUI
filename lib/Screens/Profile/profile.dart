@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tinder/controllers/SignUpController.dart';
 import 'package:tinder/main.dart';
 import 'editProfile/edit.dart';
-
+import 'package:get/get.dart';
 import '../../constants.dart';
 import 'package:get/get.dart';
 
@@ -20,12 +20,8 @@ class ProfileScreen extends StatelessWidget {
         centerTitle: true,
         leading: new IconButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      MyHomePage(title: 'Flutter Demo Home Page')),
-            );
+            Get.back();
+            Get.to(MyHomePage(title: 'Flutter Demo Home Page'));
           },
           icon: Icon(
             Icons.arrow_back,
@@ -107,10 +103,7 @@ class ProfileScreen extends StatelessWidget {
                           icon: Icons.edit,
                           iconColor: Colors.blueGrey,
                           onPressed: () {
-                            Navigator.pushNamed(
-                              context,
-                              EditProfilePage.routeName,
-                            );
+                            Get.to(EditProfilePage());
                           },
                         ),
                         IconTextInfo(

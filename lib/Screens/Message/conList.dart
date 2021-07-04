@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'IndvChat/chat.dart';
+import 'package:get/get.dart';
 
 class ConList extends StatefulWidget{
   final String name;
@@ -17,9 +18,8 @@ class _ConListState extends State<ConList> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context){
-          return Chatpage(name: widget.name,);
-        }));
+
+        Get.to(Chatpage(name: widget.name,));
       },
       child: Container(
         padding: EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'chatDetails.dart';
+import 'package:get/get.dart';
 
 class Chatpage extends StatefulWidget {
   static const routeName = './ChatPage';
@@ -31,7 +32,7 @@ class _ChatpageState extends State<Chatpage> {
               children: <Widget>[
                 IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Get.back();
                   },
                   icon: Icon(
                     Icons.arrow_back,

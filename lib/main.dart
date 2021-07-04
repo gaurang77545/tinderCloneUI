@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tinder/Screens/Login/login_screen.dart';
 import 'package:tinder/Screens/Message/IndvChat/chat.dart';
 import 'package:tinder/Screens/Signup/signup_screen.dart';
+import 'package:tinder/Screens/Splash_screen/splash.dart';
 import 'package:tinder/Screens/Welcome/welcome_screen.dart';
 import './cards.dart';
 import './matches.dart';
@@ -10,6 +11,7 @@ import 'Screens/Message/message.dart';
 import 'Screens/Profile/profile.dart';
 import 'Screens/Profile/editProfile/edit.dart';
 import 'package:get/get.dart';
+
 //Files Imported
 void main() => runApp(MyApp());
 
@@ -29,28 +31,17 @@ class MyApp extends StatelessWidget {
         primaryColorBrightness: Brightness.light,
         primarySwatch: Colors.blue,
       ),
-      //defaultTransition: ,
-    //  initialRoute:'/' ,
-    home: WelcomeScreen(),
-      // getPages: [
-      //   GetPage(name: '/', page: () => SplashScreen()),
-      //   GetPage(name:WelcomeScreen.routeName,page:() => WelcomeScreen() ),
-      //   GetPage(name:LoginScreen.routeName,page:() => LoginScreen() ),
-      //   GetPage(name: SignUpScreen.routeName,page:() => SignUpScreen() ),
-      //   GetPage(name: MyHomePage.routeName,page:() => MyHomePage()),
-      //   GetPage(name: ProfileScreen.routeName,page:() => ProfileScreen()),
-      //   GetPage(name:Chatpage.routeName,page:() => Chatpage(name: 'Chats',) ),
-      //   GetPage(name:EditProfilePage.routeName,page:() =>EditProfilePage() ),
-        routes:{
-        WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
-        LoginScreen.routeName: (ctx) => LoginScreen(),
-        SignUpScreen.routeName: (ctx) => SignUpScreen(),
-        MyHomePage.routeName: (ctx) => MyHomePage(),
-        ProfileScreen.routeName: (ctx) => ProfileScreen(),
-        Chatpage.routeName: (ctx) => Chatpage(name: 'CHATS'),
-        EditProfilePage.routeName: (ctx) => EditProfilePage()
-        }
-   //   ],
+      home: SplashScreen(),
+      getPages: [
+        GetPage(name: '/', page: () => SplashScreen()),
+        GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen()),
+        GetPage(name: LoginScreen.routeName, page: () => LoginScreen()),
+        GetPage(name: SignUpScreen.routeName, page: () => SignUpScreen()),
+        GetPage(name: MyHomePage.routeName, page: () => MyHomePage()),
+        GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen()),
+        GetPage(name: Chatpage.routeName, page: () => Chatpage(name: 'CHATS')),
+        GetPage(name: EditProfilePage.routeName, page: () => EditProfilePage()),
+      ],
     );
   }
 }
@@ -80,15 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
           size: 40.0,
         ),
         onPressed: () {
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return ProfileScreen();
-              },
-            ),
-          );
+          Get.back();
+          Get.to(ProfileScreen());
         },
       ),
       actions: <Widget>[
@@ -99,15 +83,8 @@ class _MyHomePageState extends State<MyHomePage> {
             size: 40.0,
           ),
           onPressed: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return MessageScreen();
-                },
-              ),
-            );
+            Get.back();
+            Get.to(MessageScreen());
           },
         ),
       ],

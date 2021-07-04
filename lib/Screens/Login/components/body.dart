@@ -83,19 +83,14 @@ class _BodyState extends State<Body> {
                         context,
                         MyHomePage.routeName,
                       );
+                      Get.back();
+                      Get.to(MyHomePage());
                     }
                   }),
               SizedBox(height: size.height * 0.03),
               AlreadyHaveAnAccountCheck(
                 press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return SignUpScreen();
-                      },
-                    ),
-                  );
+                  Get.to(SignUpScreen());
                 },
               ),
               SizedBox(
