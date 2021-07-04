@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tinder/Screens/Profile/profile.dart';
+import 'package:get/get.dart';
+import 'package:tinder/controllers/SignUpController.dart';
 
 class EditProfilePage extends StatefulWidget {
   static const routeName = './EditScreen';
@@ -13,6 +14,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   TextEditingController _ageController = TextEditingController();
   TextEditingController _locationController = TextEditingController();
   TextEditingController _bioController = TextEditingController();
+  SignupController myController = Get.put(SignupController());
   String gender;
 
   bool showPassword = false;
@@ -20,11 +22,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController(text: "Karthik");
-    _ageController = TextEditingController(text: "20");
-    _locationController = TextEditingController(text: "Hyderabad");
-    _bioController = TextEditingController(text: "I am very expressive");
+    _nameController =
+        TextEditingController(text: "${myController.signup.value.fName}");
+    _ageController =
+        TextEditingController(text: "${myController.signup.value.age}");
+    _locationController =
+        TextEditingController(text: "${myController.signup.value.location}");
+    _bioController =
+        TextEditingController(text: "${myController.signup.value.bio}");
   }
+
   @override
   void dispose() {
     _nameController.dispose();
@@ -33,7 +40,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     _bioController.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -73,22 +79,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       width: 130,
                       height: 130,
                       decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor),
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.1),
-                                offset: Offset(0, 10))
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                "1.jpg",
-                              ))),
+                        border: Border.all(
+                            width: 4,
+                            color: Theme.of(context).scaffoldBackgroundColor),
+                        boxShadow: [
+                          BoxShadow(
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                              color: Colors.black.withOpacity(0.1),
+                              offset: Offset(0, 10))
+                        ],
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              "https://randomuser.me/api/portraits/women/50.jpg"),
+                        ),
+                      ),
                     ),
                     Positioned(
                         bottom: 0,
@@ -117,10 +124,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
               buildTextField("Full Name", false, _nameController, 1),
               buildTextField("Age", false, _ageController, 1),
-              buildTextField(
-                  "Location", false, _locationController, 1),
-              buildTextField(
-                  "Bio", false, _bioController, 2),
+              buildTextField("Location", false, _locationController, 1),
+              buildTextField("Bio", false, _bioController, 2),
               AppDropdownInput(
                 hintText: "Gender",
                 options: ["Male", "Female"],
@@ -185,30 +190,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-  Widget buildTextField(String labelText,
-      bool isPasswordTextField, TextEditingController cont, int maxLn) {
-
+  Widget buildTextField(String labelText, bool isPasswordTextField,
+      TextEditingController cont, int maxLn) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 25.0),
-      child: TextField(
-        maxLines: maxLn,
-        controller: cont,
-        obscureText: isPasswordTextField ? showPassword : false,
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(bottom: 3),
-            //labelText: labelText,
-            helperText: labelText, //Display users info before tap.
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            //hintText: hintText,
-            hintStyle: TextStyle(
-              fontSize: 16,
-              color: Colors.black,
-            )),
-        autofocus: true,
-      )
-
-    );
-
+        padding: const EdgeInsets.only(bottom: 25.0),
+        child: TextField(
+          maxLines: maxLn,
+          controller: cont,
+          obscureText: isPasswordTextField ? showPassword : false,
+          decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(bottom: 3),
+              //labelText: labelText,
+              helperText: labelText, //Display users info before tap.
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              //hintText: hintText,
+              hintStyle: TextStyle(
+                fontSize: 16,
+                color: Colors.black,
+              )),
+          autofocus: true,
+        ));
   }
 }
 
@@ -269,41 +270,3 @@ class AppDropdownInput<T> extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

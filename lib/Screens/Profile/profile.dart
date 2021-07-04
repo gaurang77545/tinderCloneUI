@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:tinder/controllers/SignUpController.dart';
 import 'package:tinder/main.dart';
 import 'editProfile/edit.dart';
 
 import '../../constants.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routeName = './ProfileScreen';
+  SignupController myController = Get.put(SignupController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -47,7 +50,8 @@ class ProfileScreen extends StatelessWidget {
                 child: Container(
                   alignment: Alignment(0.0, 2.5),
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage("img1.jpg"),
+                    backgroundImage: NetworkImage(
+                        "https://randomuser.me/api/portraits/women/50.jpg"),
                     radius: 60.0,
                   ),
                 ),
@@ -55,13 +59,15 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Text(
-                "Karthik, 20",
-                style: TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.black,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.w700),
+              Obx(
+                () => Text(
+                  "${myController.signup.value.fName}, ${myController.signup.value.age}",
+                  style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.black,
+                      letterSpacing: 2.0,
+                      fontWeight: FontWeight.w700),
+                ),
               ),
               SizedBox(
                 height: 10,

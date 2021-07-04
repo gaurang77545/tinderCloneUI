@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tinder/controllers/Logincontroller.dart';
 import '/Screens/Login/components/background.dart';
 import '/Screens/Signup/signup_screen.dart';
 import '/components/already_have_an_account_acheck.dart';
@@ -7,22 +8,22 @@ import '/components/rounded_input_field.dart';
 import '/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 import '/main.dart';
+import 'package:get/get.dart';
 
 class Body extends StatefulWidget {
-  Body({
-    Key key,
-  }) : super(key: key);
-
   @override
   _BodyState createState() => _BodyState();
 }
 
 class _BodyState extends State<Body> {
-  String email;
+  var email = '';
 
-  String pass;
+  var pass = '';
+
+  MyControllerLogin myController = Get.put(MyControllerLogin());
 
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -44,21 +45,23 @@ class _BodyState extends State<Body> {
                 height: size.height * 0.35,
               ),
               SizedBox(height: size.height * 0.03),
-              RoundedInputField(
-                icon: Icons.email,
-                hintText: "Your Email",
-                onChanged: (value) {
-                  email = '$value';
-                },
-                validator: (value) {
-                  if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(value) ==
-                      false) {
-                    return 'Enter a valid email';
-                  }
-                  email = value;
-                  return null;
-                },
+              Obx(
+                () => RoundedInputField(
+                  icon: Icons.email,
+                  hintText: "Your Email",
+                  onChanged: (value) {
+                    email = '$value';
+                  },
+                  validator: (value) {
+                    if (RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value) ==
+                        false) {
+                      return 'Enter a valid email';
+                    }
+                    email = value;
+                    return null;
+                  },
+                ),
               ),
               RoundedPasswordField(
                 onChanged: (value) {
@@ -75,6 +78,7 @@ class _BodyState extends State<Body> {
                   text: "LOGIN",
                   press: () {
                     if (_formKey.currentState.validate()) {
+                      myController.setEmailAndPassword(email, pass);
                       Navigator.popAndPushNamed(
                         context,
                         MyHomePage.routeName,

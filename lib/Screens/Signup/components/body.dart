@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tinder/constants.dart';
+import 'package:tinder/controllers/Logincontroller.dart';
+import 'package:tinder/controllers/SignUpController.dart';
 import '/Screens/Login/login_screen.dart';
 import '/Screens/Signup/components/background.dart';
 import '/Screens/Signup/components/or_divider.dart';
@@ -11,6 +13,7 @@ import '/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 import '/main.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:get/get.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -31,6 +34,8 @@ class _BodyState extends State<Body> {
   final _formKey = GlobalKey<FormState>();
   List<bool> isSelected = [false, false, false];
   List<String> genderOptions = ['Male', 'Female', 'Others'];
+  SignupController myController = Get.put(SignupController());
+  MyControllerLogin myControllerLogin = Get.put(MyControllerLogin());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -205,6 +210,10 @@ class _BodyState extends State<Body> {
                   text: "SIGNUP",
                   press: () {
                     if (_formKey.currentState.validate()) {
+                      myController.setData(email, username, fName, lName,
+                          gender, location, bio, pass, number, age);
+                      print(myController.getData());
+                      myControllerLogin.setEmailAndPassword(email, pass);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
