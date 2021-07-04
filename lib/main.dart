@@ -10,6 +10,7 @@ import 'Screens/Message/message.dart';
 import 'Screens/Profile/profile.dart';
 import 'Screens/Splash_screen/splash.dart';
 import 'Screens/Profile/editProfile/edit.dart';
+import 'package:get/get.dart';
 
 //Files Imported
 void main() => runApp(MyApp());
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -31,16 +32,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: SplashScreen(),
-      routes: {
-        WelcomeScreen.routeName: (ctx) => WelcomeScreen(),
-        LoginScreen.routeName: (ctx) => LoginScreen(),
-        SignUpScreen.routeName: (ctx) => SignUpScreen(),
-        MyHomePage.routeName: (ctx) => MyHomePage(),
-        ProfileScreen.routeName: (ctx) => ProfileScreen(),
-        Chatpage.routeName: (ctx) => Chatpage(name: 'CHATS'),
-        EditProfilePage.routeName: (ctx) => EditProfilePage()
-
-      },
+      getPages: [
+        GetPage(name: WelcomeScreen.routeName, page: () => WelcomeScreen()),
+        GetPage(name: LoginScreen.routeName, page: () => LoginScreen()),
+        GetPage(name: SignUpScreen.routeName, page: () => SignUpScreen()),
+        GetPage(name: MyHomePage.routeName, page: () => MyHomePage()),
+        GetPage(name: ProfileScreen.routeName, page: () => ProfileScreen()),
+        GetPage(name: Chatpage.routeName, page: () => Chatpage(name: 'CHATS')),
+        GetPage(name: EditProfilePage.routeName, page: () => EditProfilePage()),
+      ],
     );
   }
 }
@@ -70,15 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
           size: 40.0,
         ),
         onPressed: () {
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return ProfileScreen();
-              },
-            ),
-          );
+          Get.back();
+          Get.to(ProfileScreen());
         },
       ),
       actions: <Widget>[
@@ -89,15 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
             size: 40.0,
           ),
           onPressed: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return MessageScreen();
-                },
-              ),
-            );
+            Get.back();
+            Get.to(MessageScreen());
           },
         ),
       ],

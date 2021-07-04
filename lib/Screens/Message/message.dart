@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'users.dart';
 import 'conList.dart';
 import '/main.dart';
+import 'package:get/get.dart';
 
 class MessageScreen extends StatelessWidget {
   final List<Users> chatUsers = [
@@ -57,13 +58,8 @@ class MessageScreen extends StatelessWidget {
         centerTitle: true,
         leading: new IconButton(
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    MyHomePage(title: 'Flutter Demo Home Page'),
-              ),
-            );
+            Get.back();
+            Get.to(MyHomePage(title: 'Flutter Demo Home Page'));
           },
           icon: Icon(
             Icons.arrow_back,

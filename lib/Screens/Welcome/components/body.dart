@@ -5,6 +5,7 @@ import '/Screens/Welcome/components/background.dart';
 import '/components/rounded_button.dart';
 import '/constants.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -30,14 +31,8 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: "LOGIN",
               press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LoginScreen();
-                    },
-                  ),
-                );
+
+                Get.to(LoginScreen());
               },
             ),
             RoundedButton(
@@ -45,14 +40,8 @@ class Body extends StatelessWidget {
               color: kPrimaryLightColor,
               textColor: Colors.black,
               press: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return SignUpScreen();
-                    },
-                  ),
-                );
+
+                Get.to(SignUpScreen());
               },
             ),
           ],

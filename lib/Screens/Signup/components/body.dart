@@ -11,6 +11,7 @@ import '/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 import '/main.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:get/get.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -205,12 +206,8 @@ class _BodyState extends State<Body> {
                   text: "SIGNUP",
                   press: () {
                     if (_formKey.currentState.validate()) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MyHomePage(title: 'Flutter Demo Home Page')),
-                      );
+
+                      Get.to(MyHomePage(title: 'Flutter Demo Home Page'));
                     } else {
                       return;
                     }
@@ -221,14 +218,8 @@ class _BodyState extends State<Body> {
                   login: false,
                   press: () {
                     _formKey.currentState.save();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return LoginScreen();
-                        },
-                      ),
-                    );
+
+                    Get.to(LoginScreen());
                   },
                 ),
                 OrDivider(),

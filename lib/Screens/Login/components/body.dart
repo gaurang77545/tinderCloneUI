@@ -7,6 +7,7 @@ import '/components/rounded_input_field.dart';
 import '/components/rounded_password_field.dart';
 import 'package:flutter_svg/svg.dart';
 import '/main.dart';
+import 'package:get/get.dart';
 
 class Body extends StatefulWidget {
   Body({
@@ -75,23 +76,14 @@ class _BodyState extends State<Body> {
                   text: "LOGIN",
                   press: () {
                     if (_formKey.currentState.validate()) {
-                      Navigator.popAndPushNamed(
-                        context,
-                        MyHomePage.routeName,
-                      );
+                      Get.back();
+                      Get.to(MyHomePage());
                     }
                   }),
               SizedBox(height: size.height * 0.03),
               AlreadyHaveAnAccountCheck(
                 press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return SignUpScreen();
-                      },
-                    ),
-                  );
+                  Get.to(SignUpScreen());
                 },
               ),
               SizedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tinder/Screens/Profile/profile.dart';
+import 'package:get/get.dart';
 
 class EditProfilePage extends StatefulWidget {
   static const routeName = './EditScreen';
@@ -47,7 +48,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             color: Colors.green,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
         ),
         title: Text(
@@ -156,7 +157,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                   RaisedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Get.back();
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text(
                         'Successfully Edited',
